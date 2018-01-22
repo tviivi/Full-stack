@@ -4,17 +4,26 @@ import ReactDOM from 'react-dom'
 const Otsikko = (props) => {
     return (
         <div>
-            <h1>{props.kurssi}</h1>
+            <h1>{props.nimi}</h1>
         </div>
+    )
+}
+
+const Osa = (props) => {
+    return (
+        <div>
+            <p>{props.moi}</p>
+            <p>{props.tehtavat}</p>
+        </div>    
     )
 }
 
 const Sisalto = (props) => {
     return (
         <div>
-            <p>{props.osa1}</p>
-            <p>{props.osa2}</p>
-            <p>{props.osa3}</p>
+            <Osa moi={props.osa1} tehtavat={props.eka}/>
+            <Osa moi={props.osa2} tehtavat={props.toka}/>
+            <Osa moi={props.osa3} tehtavat={props.kolmas}/>
         </div>
     )
 }
@@ -22,9 +31,7 @@ const Sisalto = (props) => {
 const Yhteensa = (props) => {
     return (
         <div>
-            <p>{props.tehtavia1}</p>
-            <p>{props.tehtavia2}</p>
-            <p>{props.tehtavia3}</p>
+            <p>{props.tehtavia1+props.tehtavia2+props.tehtavia3}</p>
         </div>
     )
 }
@@ -40,8 +47,8 @@ const App = () => {
 
     return (
           <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto osa1={osa1} osa2={osa2} osa3={osa3} />
+      <Otsikko nimi={kurssi} />
+      <Sisalto osa1={osa1} osa2={osa2} osa3={osa3} eka={tehtavia1} toka={tehtavia2} kolmas={tehtavia3} />
       <Yhteensa tehtavia1={tehtavia1} tehtavia2={tehtavia2} tehtavia3={tehtavia3} />
 
         </div>
