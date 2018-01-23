@@ -10,8 +10,8 @@ const Button = ({ handleClick, text }) => (
   const Statistic = ({nimi, arvo}) => {
     return (
       <tr>
-      {nimi+" "}
-      {arvo}
+      <td>{nimi}</td>
+      <td>{arvo}</td>
       </tr>
     )
   }
@@ -46,40 +46,40 @@ class App extends React.Component {
 
     render() {
       const Statistics = () => {
-          if (this.state.hyva+this.state.huono+this.state.neutraali==0) {
+          if (this.state.hyva+this.state.huono+this.state.neutraali===0) {
               return (
-                  <p>ei yhtään palautetta annettu</p>
+                  <p>Ei yhtään palautetta annettu</p>
               )
           }
       return (
-        <div>
+        <table>
           <Statistic
-                nimi = "hyvä"
+                nimi = "Hyvä "
                 arvo = {this.state.hyva}
                 />
                 <Statistic
-                nimi = "neutraali"
+                nimi = "Neutraali "
                 arvo = {this.state.neutraali}
                 />
                 <Statistic
-                nimi = "huono"
+                nimi = "Huono "
                 arvo = {this.state.huono}
                 />
                 <Statistic
-                nimi = "keskiarvo"
+                nimi = "Keskiarvo "
                 arvo = {((this.state.hyva-this.state.huono)/(this.state.hyva+this.state.huono+this.state.neutraali))}
                 />
                 <Statistic
-                nimi = "positiivisia"
+                nimi = "Positiivisia "
                 arvo = {(((this.state.hyva)/(this.state.hyva+this.state.huono+this.state.neutraali))*100)+"%"}
                 />
-                </div>
+                </table>
                 )
               }
             
                 return (
                   <div>
-            <h1>anna palautetta</h1>
+            <h1>Anna palautetta</h1>
           
           <div>
             <Button handleClick={this.asetaArvoon(1)}
@@ -92,7 +92,7 @@ class App extends React.Component {
               text="Huono"
             />
 
-            <h1>statistiikka</h1>
+            <h1>Statistiikka</h1>
             <Statistics/>
           </div>
         </div>
