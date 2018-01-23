@@ -1,52 +1,60 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Otsikko = (props) => {
-    return (
+class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        hyva: 0,
+        neutraali: 0,
+        huono: 0
+      }
+    }
+  
+    asetaArvoon1 = (arvo1) => {
+      return () => {
+        this.setState({ hyva: arvo1})
+      }
+    }
+
+    asetaArvoon2 = (arvo2) => {
+        return () => {
+            this.setState({ neutraali: arvo2})
+        }
+    }
+
+    asetaArvoon3 = (arvo3) => {
+        return() => {
+            this.setState({ huono: arvo3})
+        }
+    }
+  
+    render() {
+      return (
         <div>
-            <h1>{props.kurssi}</h1>
-        </div>
-    )
-}
-
-const Sisalto = (props) => {
-    return (
-        <div>
-            <p>{props.osa1}</p>
-            <p>{props.osa2}</p>
-            <p>{props.osa3}</p>
-        </div>
-    )
-}
-
-const Yhteensa = (props) => {
-    return (
-        <div>
-            <p>{props.tehtavia1}</p>
-            <p>{props.tehtavia2}</p>
-            <p>{props.tehtavia3}</p>
-        </div>
-    )
-}
-
-const App = () => {
-    const kurssi = 'Half Stack -sovelluskehitys'
-    const osa1 = 'Reactin perusteet'
-    const tehtavia1 = 10
-    const osa2 = 'Tiedonvälitys propseilla'
-    const tehtavia2 = 7
-    const osa3 = 'Komponenttien tila'
-    const tehtavia3 = 14
-
-    return (
+            <h1>anna palautetta</h1>
+          
           <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto osa1={osa1} osa2={osa2} osa3={osa3} />
-      <Yhteensa tehtavia1={tehtavia1} tehtavia2={tehtavia2} tehtavia3={tehtavia3} />
+            <button onClick={this.asetaArvoon1(this.state.hyva + 1)}>
+              Hyvä
+            </button>
+            <button onClick={this.asetaArvoon2(this.state.neutraali + 1)}>
+              Neutraali
+            </button>
+            <button onClick={this.asetaArvoon3(this.state.huono + 1)}>
+              Huono
+            </button>
 
+            <h1>statistiikka</h1>
+
+            <p>hyvä {this.state.hyva}</p>
+            <p>neutraali {this.state.neutraali}</p>
+            <p>huono {this.state.huono}</p>
+          </div>
         </div>
-    )
-}
+      )
+    }
+  }
 
 ReactDOM.render(
     <App />,
