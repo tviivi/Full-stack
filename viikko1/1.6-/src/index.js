@@ -43,35 +43,42 @@ class App extends React.Component {
         }
     }
   
+
     render() {
       const Statistics = () => {
-        return (
-            <div>
-          <Statistic
-                  nimi = "hyvä"
-                  arvo = {this.state.hyva}
-                  />
-                  <Statistic
-                  nimi = "neutraali"
-                  arvo = {this.state.neutraali}
-                  />
-                  <Statistic
-                  nimi = "huono"
-                  arvo = {this.state.huono}
-                  />
-                  <Statistic
-                  nimi = "keskiarvo"
-                  arvo = {((this.state.hyva-this.state.huono)/(this.state.hyva+this.state.huono+this.state.neutraali))}
-                  />
-                  <Statistic
-                  nimi = "positiivisia"
-                  arvo = {(((this.state.hyva)/(this.state.hyva+this.state.huono+this.state.neutraali))*100)+"%"}
-                  />  
-                  </div>
-        )
-    }
+          if (this.state.hyva+this.state.huono+this.state.neutraali==0) {
+              return (
+                  <p>ei yhtään palautetta annettu</p>
+              )
+          }
       return (
         <div>
+          <Statistic
+                nimi = "hyvä"
+                arvo = {this.state.hyva}
+                />
+                <Statistic
+                nimi = "neutraali"
+                arvo = {this.state.neutraali}
+                />
+                <Statistic
+                nimi = "huono"
+                arvo = {this.state.huono}
+                />
+                <Statistic
+                nimi = "keskiarvo"
+                arvo = {((this.state.hyva-this.state.huono)/(this.state.hyva+this.state.huono+this.state.neutraali))}
+                />
+                <Statistic
+                nimi = "positiivisia"
+                arvo = {(((this.state.hyva)/(this.state.hyva+this.state.huono+this.state.neutraali))*100)+"%"}
+                />
+                </div>
+                )
+              }
+            
+                return (
+                  <div>
             <h1>anna palautetta</h1>
           
           <div>
@@ -87,7 +94,6 @@ class App extends React.Component {
 
             <h1>statistiikka</h1>
             <Statistics/>
-           
           </div>
         </div>
       )
