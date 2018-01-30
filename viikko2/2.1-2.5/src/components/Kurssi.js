@@ -2,20 +2,24 @@ import React from 'react'
 
 const Kurssi =( props ) => {
     const {kurssi} = props;
-    const Otsikko = (props) => <h1>{props.kurssi.nimi}</h1>
-    const yhteensa =  kurssi.osat.map(kurssi => kurssi.tehtavia)
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    const sisalto = () => kurssi.osat.map(kurssi => 
+
+    const Kurssi = () => kurssi.map(kurssi => 
     <li key={kurssi.id}>
-    {kurssi.nimi} {kurssi.tehtavia}</li>
-    )
+    <h1>{kurssi.nimi}</h1> {kurssi.osat.map(osat =>
+    <li key={osat.id}>
+    {osat.nimi} {osat.tehtavia}</li>
+    )} {'yhteensä '}{(kurssi.osat.map(kurssi => kurssi.tehtavia)).reduce(reducer)} { 'tehtävää'}
+    </li>)
+
+    
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    
     return (
         <div>
-            <Otsikko kurssi={kurssi}/>
         <ul>
-        {sisalto()}
+        <div>{Kurssi()}</div>
         </ul>
-        {'yhteensä '}{yhteensa.reduce(reducer)}{' tehtävää'}
+        
         </div>
     )
 }
