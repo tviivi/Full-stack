@@ -1,22 +1,25 @@
 import React from 'react';
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        { name: 'Arto Hellas',
-          number: '0401234567',
-          id: 1 
-        },
-        { name: 'Viivi Tiihonen',
-          number: '0507654321',
-          id: 2
-        }
-      ],
+      persons: [],
       newName: 'uusi nimi...',
-      newNumber: 'uusi numero...'
+      newNumber: 'uusi numero...',
     }
+    console.log('constructor')
+  }
+
+  componentDidMount() {
+    console.log('will mounttt')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        this.setState({ persons: response.data })
+      })
   }
 
   addName = (event) => {
@@ -27,7 +30,7 @@ class App extends React.Component {
         id: this.state.persons.length + 1
       }
     
-      if (this.state.persons.find(x => x.name == this.state.newName) == null) {
+      if (this.state.persons.find(x => x.name === this.state.newName) == null) {
       const persons = this.state.persons.concat(nameObject)
     
       this.setState({
@@ -50,7 +53,7 @@ class App extends React.Component {
       id: this.state.persons.length + 1
     }
   
-    if (this.state.persons.find(x => x.number == this.state.newNumber) == null) {
+    if (this.state.persons.find(x => x.number === this.state.newNumber) == null) {
     const persons = this.state.persons.concat(numberObject)
   
     this.setState({
@@ -66,10 +69,12 @@ handleNumberChange = (event) => {
 }
 
   render() {
+    console.log('render')
     return (
       <div>
-        <h2>Puhelinluettelo</h2>
+        <h1>Puhelinluettelo</h1>
           <div>
+              <h2>Lisää uusi</h2>
           <form onSubmit={this.addName}>
           <div>
             nimi:
@@ -89,9 +94,7 @@ handleNumberChange = (event) => {
           </form>
         </div>
         <h2>Numerot</h2>
-        <table>
         {this.state.persons.map(persons => <div key={persons.id}> {persons.name} {persons.number}</div>)}
-        </table>
       </div>
     )
   }

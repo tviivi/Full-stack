@@ -1,0 +1,22 @@
+{
+    "persons": [
+      { "name": "Arto Hellas",
+        "number": "0401234567",
+        "id": 1 
+      },
+      { "name": "Viivi Tiihonen",
+        "number": "0507654321",
+        "id": 2
+      },
+      {
+        "name": "Miika Rasola",
+        "number": "0417654123",
+        "id": 3
+      },
+      {
+        "name": "Arto Järvinen",
+        "number": "9876543120",
+        "id": 4
+      }
+    ]
+  }
