@@ -22,12 +22,14 @@ class App extends React.Component {
         id: this.state.persons.length + 1
       }
     
+      if (this.state.persons.find(x => x.name == this.state.newName) == null) {
       const persons = this.state.persons.concat(nameObject)
     
       this.setState({
         persons: persons,
         newName: ''
       })
+    }
   }
 
   handleNameChange = (event) => {
